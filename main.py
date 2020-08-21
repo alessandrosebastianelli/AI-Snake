@@ -40,24 +40,31 @@ def get_record(score, record):
     else:
         return record
 
+def display_ui(game, score, record, generation):
+    myfont = pygame.font.SysFont('Segoe UI', 30)
+    myfont_bold = pygame.font.SysFont('Segoe UI', 30, True)
 
-def display_ui(game, score, record):
-    myfont = pygame.font.SysFont('Segoe UI', 20)
-    myfont_bold = pygame.font.SysFont('Segoe UI', 20, True)
-    text_score = myfont.render('SCORE: ', True, (0, 0, 0))
-    text_score_number = myfont.render(str(score), True, (0, 0, 0))
-    text_highest = myfont.render('HIGHEST SCORE: ', True, (0, 0, 0))
+    text_score = myfont.render('Current score: ', True, (0, 0, 0))
+    text_score_number = myfont_bold.render(str(score), True, (0, 0, 0))
+    text_highest = myfont.render('Best score: ', True, (0, 0, 0))
     text_highest_number = myfont_bold.render(str(record), True, (0, 0, 0))
-    game.gameDisplay.blit(text_score, (45,440))
-    game.gameDisplay.blit(text_score_number, (120, 440))
-    game.gameDisplay.blit(text_highest, (190, 440))
-    game.gameDisplay.blit(text_highest_number, (350, 440))
+    text_generation = myfont.render('Generation n: ', True, (0, 0, 0))
+    text_generation_number = myfont_bold.render(str(generation), True, (0, 0, 0))
+    
+    game.gameDisplay.blit(text_score, (20, 440))
+    game.gameDisplay.blit(text_score_number, (200, 440))
+    game.gameDisplay.blit(text_highest, (240, 440))
+    game.gameDisplay.blit(text_highest_number, (400, 440))
+    game.gameDisplay.blit(text_generation, (20, 470))
+    game.gameDisplay.blit(text_generation_number, (200, 470))
+
+
+
     game.gameDisplay.blit(game.background, (10, 10))
 
-
-def display(player, food, game, record):
+def display(player, food, game, record, generation):
     game.gameDisplay.fill((255, 255, 255))
-    display_ui(game, game.score, record)
+    display_ui(game, game.score, record, generation)
     player.render(player.position[-1][0], player.position[-1][1], player.tail_lenght, game)
     food.render(food.x, food.y, game)
 
@@ -115,7 +122,7 @@ def run(display_option, speed, params):
         # Perform first move
         initialize_game(player1, game, food1, agent, params['batch_size'])
         if display_option:
-            display(player1, food1, game, record)
+            display(player1, food1, game, record, counter_games)
 
         while not game.crash:
             if not params['train']:
@@ -150,7 +157,7 @@ def run(display_option, speed, params):
 
             record = get_record(game.score, record)
             if display_option:
-                display(player1, food1, game, record)
+                display(player1, food1, game, record, counter_games)
                 pygame.time.wait(speed)
         if params['train']:
             agent.replay_new(agent.memory, params['batch_size'])
