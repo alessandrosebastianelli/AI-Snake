@@ -1,6 +1,5 @@
 import pygame
 import numpy as np
-
 from utils import eat
 from utils import update_screen
 
@@ -22,11 +21,14 @@ class Snake(object):
         self.x_change = 20
         self.y_change = 0
 
+    # Display or Render the Snake
     def render(self, x, y, tail_lenght, game):
         self.position[-1][0] = x
         self.position[-1][1] = y
 
+        # If the game is not crashed, render Snake and the tail
         if game.crash == False:
+            # Display the tail
             for i in range(tail_lenght):
                 x_temp, y_temp = self.position[len(self.position)-1-i]
                 game.gameDisplay.blit(self.tile, (x_temp, y_temp))
@@ -35,6 +37,7 @@ class Snake(object):
         else:
             pygame.time.wait(300)
     
+    # Update the Snake position
     def update(self, x, y):
         if self.position[-1][0] != x or self.position[-1][1] != y:
             if self.tail_lenght > 1:
@@ -43,34 +46,39 @@ class Snake(object):
             self.position[-1][0] = x
             self.position[-1][1] = y
    
+    # Update the Snake position
     def move(self, move, x, y, game, food, agent):
         move_array = [self.x_change, self.y_change]
-
+        
+        # Increment the tail if Snake eats a fruit
         if self.eaten:
             self.position.append([self.x, self.y])
             self.eaten = False
             self.tail_lenght = self.tail_lenght + 1
 
+        # Set the x and y velocity based on the input <move>
         if np.array_equal(move, [1, 0, 0]):
-            move_array = self.x_change, self.y_change
-        elif np.array_equal(move, [0, 1, 0]) and self.y_change == 0:  # right - going horizontal
+            move_array = self.x_change, self.y_change                 # Same
+        elif np.array_equal(move, [0, 1, 0]) and self.y_change == 0:  # Right
             move_array = [0, self.x_change]
-        elif np.array_equal(move, [0, 1, 0]) and self.x_change == 0:  # right - going vertical
+        elif np.array_equal(move, [0, 1, 0]) and self.x_change == 0:  # Down
             move_array = [-self.y_change, 0]
-        elif np.array_equal(move, [0, 0, 1]) and self.y_change == 0:  # left - going horizontal
+        elif np.array_equal(move, [0, 0, 1]) and self.y_change == 0:  # Left
             move_array = [0, -self.x_change]
-        elif np.array_equal(move, [0, 0, 1]) and self.x_change == 0:  # left - going vertical
+        elif np.array_equal(move, [0, 0, 1]) and self.x_change == 0:  # Up
             move_array = [self.y_change, 0]
         
         self.x_change, self.y_change = move_array
         self.x = x + self.x_change
         self.y = y + self.y_change
 
+        # Borders collision
         if self.x < 20 or self.x > game.width - 40 \
                 or self.y < 20 \
                 or self.y > game.height - 40 \
                 or [self.x, self.y] in self.position:
             game.crash = True
-        eat(self, food, game)
 
+
+        eat(self, food, game)
         self.update(self.x, self.y)

@@ -23,8 +23,8 @@ def define_parameters():
     params['memory_size'] = 2500
     params['batch_size'] = 500
     params['weights_path'] = 'weights/weights.hdf5'
-    params['load_weights'] = True
-    params['train'] = False
+    params['load_weights'] = False
+    params['train'] = True
     return params
 
 def eat(player, food, game):
