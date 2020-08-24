@@ -170,5 +170,4 @@ if __name__ == '__main__':
     parser.add_argument("--display", type=bool, default=True)
     parser.add_argument("--speed", type=int, default=1)
     args = parser.parse_args()
-    params['bayesian_optimization'] = False    # Use bayesOpt.py for Bayesian Optimization
     run(args.display, args.speed, params) 
