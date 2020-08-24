@@ -24,9 +24,11 @@ class Agent(object):
         self.memory = collections.deque(maxlen=params['memory_size'])
         self.weights = params['weights_path']
         self.load_weights = params['load_weights']
-        self.model = self.network()
+        self.model = self.build_network()
 
-    def network(self):
+    # Create the network
+    def build_network(self):
+        # Build a sequential model
         model = Sequential()
         model.add(Dense(output_dim=self.first_layer, activation='relu', input_dim=11))
         model.add(Dense(output_dim=self.second_layer, activation='relu'))
@@ -35,6 +37,7 @@ class Agent(object):
         opt = Adam(self.learning_rate)
         model.compile(loss='mse', optimizer=opt)
 
+        # If true load pre-trained weights
         if self.load_weights:
             model.load_weights(self.weights)
         return model
@@ -59,8 +62,7 @@ class Agent(object):
             add, player.position[-1],[-20,0])) in player.position) or player.position[-1][0] - 20 < 20)) or (player.x_change == 20 and player.y_change == 0 and (
             (list(map(add,player.position[-1],[0,-20])) in player.position) or player.position[-1][-1] - 20 < 20)) or (
             player.x_change == -20 and player.y_change == 0 and ((list(map(add,player.position[-1],[0,20])) in player.position) or
-            player.position[-1][-1] + 20 >= (game.height-20))), #danger left
-
+            player.position[-1][-1] + 20 >= (game.height-20))), # danger left
 
             player.x_change == -20,         # move left
             player.x_change == 20,          # move right
@@ -72,14 +74,16 @@ class Agent(object):
             food.y > player.y               # food down
             ]
 
+        # From boolean to 0-1
         for i in range(len(state)):
             if state[i]:
                 state[i]=1
             else:
                 state[i]=0
-
         return np.asarray(state)
 
+    # Assign a reward: if Snake hits himself or a wall (game crash) the reward is set to -10
+    # is Snake eats a fruit the reward is set to +10
     def set_reward(self, player, crash):
         self.reward = 0
         if crash:
