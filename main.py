@@ -11,6 +11,7 @@ from keras.utils import to_categorical
 from Game import Game
 from Snake import Snake
 from Food import Food
+from utils import get_record, update_screen
 
 def define_parameters():
     params = dict()
@@ -27,23 +28,10 @@ def define_parameters():
     params['train'] = False
     return params
 
-def eat(player, food, game):
-    if player.x == food.x and player.y == food.y:
-        food.food_coord(game, player)
-        player.eaten = True
-        game.score = game.score + 1
-
-
-def get_record(score, record):
-    if score >= record:
-        return score
-    else:
-        return record
-
 def display_ui(game, score, record, generation):
+    # Define fonts
     myfont = pygame.font.SysFont('Segoe UI', 30)
     myfont_bold = pygame.font.SysFont('Segoe UI', 30, True)
-
     text_score = myfont.render('Current score: ', True, (0, 0, 0))
     text_score_number = myfont_bold.render(str(score), True, (0, 0, 0))
     text_highest = myfont.render('Best score: ', True, (0, 0, 0))
@@ -51,6 +39,7 @@ def display_ui(game, score, record, generation):
     text_generation = myfont.render('Generation n: ', True, (0, 0, 0))
     text_generation_number = myfont_bold.render(str(generation), True, (0, 0, 0))
     
+    # Render the text for the scores
     game.gameDisplay.blit(text_score, (20, 440))
     game.gameDisplay.blit(text_score_number, (200, 440))
     game.gameDisplay.blit(text_highest, (240, 440))
@@ -58,8 +47,7 @@ def display_ui(game, score, record, generation):
     game.gameDisplay.blit(text_generation, (20, 470))
     game.gameDisplay.blit(text_generation_number, (200, 470))
 
-
-
+    # Render the background
     game.gameDisplay.blit(game.background, (10, 10))
 
 def display(player, food, game, record, generation):
@@ -67,11 +55,6 @@ def display(player, food, game, record, generation):
     display_ui(game, game.score, record, generation)
     player.render(player.position[-1][0], player.position[-1][1], player.tail_lenght, game)
     food.render(food.x, food.y, game)
-
-
-def update_screen():
-    pygame.display.update()
-    pygame.event.get()
 
 
 def initialize_game(player, game, food, agent, batch_size):
@@ -83,18 +66,6 @@ def initialize_game(player, game, food, agent, batch_size):
     agent.remember(state_init1, action, reward1, state_init2, game.crash)
     agent.replay_new(agent.memory, batch_size)
 
-
-def plot_seaborn(array_counter, array_score):
-    sns.set(color_codes=True)
-    ax = sns.regplot(
-        np.array([array_counter])[0],
-        np.array([array_score])[0],
-        color="b",
-        x_jitter=.1,
-        line_kws={'color': 'green'}
-    )
-    ax.set(xlabel='games', ylabel='score')
-    plt.show()
 
 
 def run(display_option, speed, params):
@@ -167,7 +138,7 @@ def run(display_option, speed, params):
         counter_plot.append(counter_games)
     if params['train']:
         agent.model.save_weights(params['weights_path'])
-    plot_seaborn(counter_plot, score_plot)
+    plot_training_stats(counter_plot, score_plot)
 
 
 if __name__ == '__main__':
