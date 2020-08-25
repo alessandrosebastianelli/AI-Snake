@@ -51,14 +51,14 @@ def display(player, food, game, record, generation):
 def define_parameters():
     params = dict()
     params['epsilon_decay_linear'] = 1/75
-    params['learning_rate'] = 0.0005
-    params['first_layer_size'] = 150   # neurons in the first layer
-    params['second_layer_size'] = 150   # neurons in the second layer
-    params['third_layer_size'] = 150    # neurons in the third layer
-    params['episodes'] = 150            
+    params['lr'] = 0.0005
+    params['firstLayer_dim'] = 150   # neurons in the first layer
+    params['secondLayer_dim'] = 150   # neurons in the second layer
+    params['thirdLayer_dim'] = 150    # neurons in the third layer
+    params['epochs'] = 150            
     params['memory_size'] = 2500
     params['batch_size'] = 500
-    params['weights_path'] = 'weights/weights.hdf5'
+    params['weights_save_path'] = 'weights/weights.hdf5'
     params['load_weights'] = True
     params['train'] = True
     return params
@@ -89,7 +89,7 @@ def run(display_option, speed, params):
     record = 0
     
     # While the games played are less then the epochs loop
-    while counter_games < params['episodes']:
+    while counter_games < params['epochs']:
         # Manage the quit event
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
