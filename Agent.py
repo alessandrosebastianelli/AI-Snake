@@ -15,31 +15,33 @@ class Agent(object):
         self.short_memory = np.array([])
         self.agent_target = 1
         self.agent_predict = 0
-        self.learning_rate = params['learning_rate']        
         self.epsilon = 1
         self.actual = []
-        self.first_layer = params['first_layer_size']
-        self.second_layer = params['second_layer_size']
-        self.third_layer = params['third_layer_size']
         self.memory = collections.deque(maxlen=params['memory_size'])
-        self.weights = params['weights_path']
+
+        # Load settings 
+        self.lr = params['lr']   
+        self.firstLayer_dim = params['firstLayer_dim']
+        self.secondLayer_dim = params['secondLayer_dim']
+        self.thirdLayer_dim = params['thirdLayer_dim']
+        self.weights_save_path = params['weights_save_path']
         self.load_weights = params['load_weights']
+
         self.model = self.build_network()
 
     # Create the network
     def build_network(self):
         # Build a sequential model
         model = Sequential()
-        model.add(Dense(output_dim=self.first_layer, activation='relu', input_dim=11))
-        model.add(Dense(output_dim=self.second_layer, activation='relu'))
-        model.add(Dense(output_dim=self.third_layer, activation='relu'))
+        model.add(Dense(output_dim=self.firstLayer_dim, activation='relu', input_dim=11))
+        model.add(Dense(output_dim=self.secondLayer_dim, activation='relu'))
+        model.add(Dense(output_dim=self.thirdLayer_dim, activation='relu'))
         model.add(Dense(output_dim=3, activation='softmax'))
-        opt = Adam(self.learning_rate)
+        opt = Adam(self.lr)
         model.compile(loss='mse', optimizer=opt)
-
         # If true load pre-trained weights
         if self.load_weights:
-            model.load_weights(self.weights)
+            model.load_weights(self.weights_save_path)
         return model
     
     def get_state(self, game, player, food):
