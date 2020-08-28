@@ -65,14 +65,14 @@ class Agent(object):
             player.x_change == -20 and player.y_change == 0 and ((list(map(add,player.position[-1],[0,20])) in player.position) or
             player.position[-1][-1] + 20 >= (game.height-20))), # danger left
 
-            player.x_change == -20,         # move left
-            player.x_change == 20,          # move right
-            player.y_change == -20,         # move up
-            player.y_change == 20,          # move down
-            food.x < player.x,              # food left
-            food.x > player.x,              # food right
-            food.y < player.y,              # food up
-            food.y > player.y               # food down
+            player.x_change == -20,         # moving left
+            player.x_change == 20,          # moving right
+            player.y_change == -20,         # moving up
+            player.y_change == 20,          # moving down
+            food.x < player.x,              # is food left
+            food.x > player.x,              # is food right
+            food.y < player.y,              # is food up
+            food.y > player.y               # is food down
             ]
 
         # From boolean to 0-1
