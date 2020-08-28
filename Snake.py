@@ -19,8 +19,9 @@ class Snake(object):
         self.tail_lenght = 1
         self.eaten = False
 
-        # Load the tile
-        self.tile = pygame.image.load('img/snake.png')
+        # Load the tiles
+        self.tile = pygame.image.load('img/snakeBody.png')
+        self.tile_head = pygame.image.load('img/snakeHead.png')
 
         # Set the initial x velocity to 20 (or y velocity to 20)
         self.x_change = 20
@@ -34,7 +35,10 @@ class Snake(object):
         # If the game is not crashed, render Snake and the tail
         if game.crash == False:
             # Display the tail
-            for i in range(tail_lenght):
+
+            x_temp, y_temp = self.position[len(self.position)-1]
+            game.gameDisplay.blit(self.tile_head, (x_temp, y_temp))
+            for i in range(1, tail_lenght):
                 x_temp, y_temp = self.position[len(self.position)-1-i]
                 game.gameDisplay.blit(self.tile, (x_temp, y_temp))
 
