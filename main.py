@@ -11,7 +11,7 @@ from keras.utils import to_categorical
 from Game import Game
 from Snake import Snake
 from Food import Food
-from utils import get_record, update_screen
+from utils import get_record, update_screen, plot_training_stats
 
 #---------------------------------------
 #                  GUI
@@ -29,7 +29,7 @@ def display_ui(game, score, record, generation):
     text_generation_number = myfont_bold.render(str(generation), True, (0, 0, 0))
     # Render the text for the scores
     game.gameDisplay.blit(text_generation, (20, 440)) 
-    game.gameDisplay.blit(text_generation_number, (200, 440)) 
+    game.gameDisplay.blit(text_generation_number, (180, 440)) 
     game.gameDisplay.blit(text_score, (240, 440)) # 20 470 
     game.gameDisplay.blit(text_score_number, (400, 440)) # 200 470
     game.gameDisplay.blit(text_highest, (240, 470))
@@ -59,7 +59,7 @@ def define_parameters():
     params['memory_size'] = 2500
     params['batch_size'] = 500
     params['weights_save_path'] = 'weights/weights.hdf5'
-    params['load_weights'] = True
+    params['load_weights'] = False
     params['train'] = True
     return params
 
@@ -72,6 +72,9 @@ def initialize_game(player, game, food, agent, batch_size):
     agent.remember(state_init1, action, reward1, state_init2, game.crash)
     agent.replay_new(agent.memory, batch_size)
 
+#---------------------------------------
+#            Game main loop
+#---------------------------------------
 def run(display_option, speed, params):
     # Initialize the pygame library
     pygame.init()
@@ -156,18 +159,20 @@ def run(display_option, speed, params):
 
     # If 'train' parameter in the dict is set to true save the new weights
     if params['train']:
-        agent.network.save_weights(params['weights_path'])
+        agent.network.save_weights(params['weights_save_path'])
     
     # When counter_games > epochs plot the training trends
     plot_training_stats(counter_plot, score_plot)
 
 
+#---------------------------------------
 if __name__ == '__main__':
-    # Set options to activate or deactivate the game view, and its speed
     pygame.font.init()
     parser = argparse.ArgumentParser()
     params = define_parameters()
+    # Activate or deactivate the game view and the
     parser.add_argument("--display", type=bool, default=True)
-    parser.add_argument("--speed", type=int, default=50)
+    parser.add_argument("--speed", type=int, default=10)
+
     args = parser.parse_args()
     run(args.display, args.speed, params) 
