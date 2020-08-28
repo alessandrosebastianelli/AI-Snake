@@ -5,6 +5,7 @@ from utils import update_screen
 
 class Snake(object):
     def __init__(self, game):
+        # Spawn the Snake in a fixed position
         x = 0.45 * game.width
         y = 0.5  * game.height
 
@@ -14,10 +15,14 @@ class Snake(object):
         self.position = []
         self.position.append([self.x, self.y])
 
+        # Set the tail lenght to 1 (Head)
         self.tail_lenght = 1
         self.eaten = False
+
+        # Load the tile
         self.tile = pygame.image.load('img/snake.png')
 
+        # Set the initial x velocity to 20 (or y velocity to 20)
         self.x_change = 20
         self.y_change = 0
 
@@ -40,9 +45,11 @@ class Snake(object):
     # Update the Snake position
     def update(self, x, y):
         if self.position[-1][0] != x or self.position[-1][1] != y:
+            # Update the tail
             if self.tail_lenght > 1:
                 for i in range(0, self.tail_lenght - 1):
                     self.position[i][0], self.position[i][1] = self.position[i + 1]
+                    
             self.position[-1][0] = x
             self.position[-1][1] = y
    

@@ -27,7 +27,7 @@ class Agent(object):
         self.weights_save_path = params['weights_save_path']
         self.load_weights = params['load_weights']
 
-        self.model = self.build_network()
+        self.network = self.build_network()
 
     # Create the network
     def build_network(self):
@@ -37,8 +37,7 @@ class Agent(object):
         model.add(Dense(output_dim=self.secondLayer_dim, activation='relu'))
         model.add(Dense(output_dim=self.thirdLayer_dim, activation='relu'))
         model.add(Dense(output_dim=3, activation='softmax'))
-        opt = Adam(self.lr)
-        model.compile(loss='mse', optimizer=opt)
+        model.compile(loss='mse', optimizer = Adam(self.lr))
         # If true load pre-trained weights
         if self.load_weights:
             model.load_weights(self.weights_save_path)
@@ -106,15 +105,15 @@ class Agent(object):
         for state, action, reward, next_state, done in minibatch:
             target = reward
             if not done:
-                target = reward + self.gamma * np.amax(self.model.predict(np.array([next_state]))[0])
-            target_f = self.model.predict(np.array([state]))
+                target = reward + self.gamma * np.amax(self.network.predict(np.array([next_state]))[0])
+            target_f = self.network.predict(np.array([state]))
             target_f[0][np.argmax(action)] = target
-            self.model.fit(np.array([state]), target_f, epochs=1, verbose=0)
+            self.network.fit(np.array([state]), target_f, epochs=1, verbose=0)
 
     def train_short_memory(self, state, action, reward, next_state, done):
         target = reward
         if not done:
-            target = reward + self.gamma * np.amax(self.model.predict(next_state.reshape((1, 11)))[0])
-        target_f = self.model.predict(state.reshape((1, 11)))
+            target = reward + self.gamma * np.amax(self.network.predict(next_state.reshape((1, 11)))[0])
+        target_f = self.network.predict(state.reshape((1, 11)))
         target_f[0][np.argmax(action)] = target
-        self.model.fit(state.reshape((1, 11)), target_f, epochs=1, verbose=0)
+        self.network.fit(state.reshape((1, 11)), target_f, epochs=1, verbose=0)

@@ -78,9 +78,9 @@ def run(display_option, speed, params):
     # Create the Agent with the parameters dictionary
     agent = Agent(params)
     # Load weights
-    weights_filepath = params['weights_path']
+    weights_filepath = params['weights_save_path']
     if params['load_weights']:
-        agent.model.load_weights(weights_filepath)
+        agent.network.load_weights(weights_filepath)
         print("weights loaded")
 
     counter_games = 0
@@ -122,7 +122,7 @@ def run(display_option, speed, params):
                 final_move = to_categorical(randint(0, 2), num_classes=3)
             else:
                 # Predict an action based on the old state (model prediction)
-                prediction = agent.model.predict(state_old.reshape((1, 11)))
+                prediction = agent.network.predict(state_old.reshape((1, 11)))
                 final_move = to_categorical(np.argmax(prediction[0]), num_classes=3)
 
             # Perform new move and get the new state
@@ -156,7 +156,7 @@ def run(display_option, speed, params):
 
     # If 'train' parameter in the dict is set to true save the new weights
     if params['train']:
-        agent.model.save_weights(params['weights_path'])
+        agent.network.save_weights(params['weights_path'])
     
     # When counter_games > epochs plot the training trends
     plot_training_stats(counter_plot, score_plot)
