@@ -23,8 +23,8 @@ class Snake(object):
         self.tile = pygame.image.load('img/snakeBody.png')
         self.tile_headN = pygame.image.load('img/snakeHeadN.png')
         self.tile_headS = pygame.image.load('img/snakeHeadS.png')
-        self.tile_headE = pygame.image.load('img/snakeHeadW.png')
-        self.tile_headW = pygame.image.load('img/snakeHeadE.png')
+        self.tile_headE = pygame.image.load('img/snakeHeadE.png')
+        self.tile_headW = pygame.image.load('img/snakeHeadW.png')
 
         # Set the initial x velocity to 20 (or y velocity to 20)
         self.x_change = 20
@@ -37,11 +37,20 @@ class Snake(object):
 
         # If the game is not crashed, render Snake and the tail
         if game.crash == False:
-            # Display the tail
-
+            
+            # Display the head with different rotation
             x_temp, y_temp = self.position[len(self.position)-1]
-            game.gameDisplay.blit(self.tile_head, (x_temp, y_temp))
 
+            if self.x_change == 20:
+                game.gameDisplay.blit(self.tile_headE, (x_temp, y_temp))
+            elif self.x_change == -20: 
+                game.gameDisplay.blit(self.tile_headW, (x_temp, y_temp))
+            elif self.y_change == -20:
+                game.gameDisplay.blit(self.tile_headN, (x_temp, y_temp))
+            elif self.y_change == 20:
+                game.gameDisplay.blit(self.tile_headS, (x_temp, y_temp))
+
+            # Display the tail
             for i in range(1, tail_lenght):
                 x_temp, y_temp = self.position[len(self.position)-1-i]
                 game.gameDisplay.blit(self.tile, (x_temp, y_temp))
