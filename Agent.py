@@ -94,26 +94,31 @@ class Agent(object):
             self.reward = 10
         return self.reward
 
+    # Add actions, states etc. to the memory
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
 
     def replay_new(self, memory, batch_size):
+        # If the lenght of the memory is greater then the batch_size
+        # then extrapolate a batch of batch size randomly from the memory
         if len(memory) > batch_size:
             minibatch = random.sample(memory, batch_size)
         else:
             minibatch = memory
+
+        # Train the network using the input in memory
         for state, action, reward, next_state, done in minibatch:
-            target = reward
+            pred = reward
             if not done:
-                target = reward + self.gamma * np.amax(self.network.predict(np.array([next_state]))[0])
-            target_f = self.network.predict(np.array([state]))
-            target_f[0][np.argmax(action)] = target
-            self.network.fit(np.array([state]), target_f, epochs=1, verbose=0)
+                pred = reward + self.gamma * np.amax(self.network.predict(np.array([next_state]))[0])
+            final_pred = self.network.predict(np.array([state]))
+            final_pred[0][np.argmax(action)] = pred
+            self.network.fit(np.array([state]), final_pred, epochs=1, verbose=0)
 
     def train_short_memory(self, state, action, reward, next_state, done):
-        target = reward
+        pred = reward
         if not done:
-            target = reward + self.gamma * np.amax(self.network.predict(next_state.reshape((1, 11)))[0])
-        target_f = self.network.predict(state.reshape((1, 11)))
-        target_f[0][np.argmax(action)] = target
-        self.network.fit(state.reshape((1, 11)), target_f, epochs=1, verbose=0)
+            pred = reward + self.gamma * np.amax(self.network.predict(next_state.reshape((1, 11)))[0])
+        final_pred = self.network.predict(state.reshape((1, 11)))
+        final_pred[0][np.argmax(action)] = pred
+        self.network.fit(state.reshape((1, 11)), final_pred, epochs=1, verbose=0)
