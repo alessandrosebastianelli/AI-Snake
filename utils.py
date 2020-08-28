@@ -1,4 +1,7 @@
 import pygame
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Function that implements the eating action
 def eat(player, food, game):
