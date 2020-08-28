@@ -28,14 +28,31 @@ def get_record(score, record):
         return record
 
 # Create a plot for the model training 
+#def plot_training_stats(array_counter, array_score):
+#    sns.set(color_codes=True)
+#    ax = sns.regplot(
+#        np.array([array_counter])[0],
+#        np.array([array_score])[0],
+#        color="b",
+#        x_jitter=.1,
+#        line_kws={'color': 'green'}
+#    )
+#    ax.set(xlabel='games', ylabel='score')
+#    plt.show()
+
+# Create a plot for the model training 
 def plot_training_stats(array_counter, array_score):
-    sns.set(color_codes=True)
-    ax = sns.regplot(
-        np.array([array_counter])[0],
-        np.array([array_score])[0],
-        color="b",
-        x_jitter=.1,
-        line_kws={'color': 'green'}
-    )
-    ax.set(xlabel='games', ylabel='score')
+    
+
+    x = np.array([array_counter])[0]
+    y = np.array([array_score])[0]
+
+    m = np.mean(y)
+    mx = np.ones((len(y)))*m;
+
+    fig, ax = plt.subplots(nrows = 1, ncols = 1, figsize = (10, 10))    
+    ax.plot(x, y, '*', color = 'b', label = 'Score values')
+    ax.plot(x, mx, color = 'r', label = 'Mean value')
+    ax.set(xlabel='Games', ylabel='Score')
+    ax.legend()
     plt.show()
