@@ -19,7 +19,7 @@ class Agent(object):
         self.actual = []
         self.memory = collections.deque(maxlen=params['memory_size'])
 
-        # Load settings 
+        # Load network settings 
         self.lr = params['lr']   
         self.firstLayer_dim = params['firstLayer_dim']
         self.secondLayer_dim = params['secondLayer_dim']
