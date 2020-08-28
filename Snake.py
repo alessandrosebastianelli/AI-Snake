@@ -21,7 +21,10 @@ class Snake(object):
 
         # Load the tiles
         self.tile = pygame.image.load('img/snakeBody.png')
-        self.tile_head = pygame.image.load('img/snakeHead.png')
+        self.tile_headN = pygame.image.load('img/snakeHeadN.png')
+        self.tile_headS = pygame.image.load('img/snakeHeadS.png')
+        self.tile_headE = pygame.image.load('img/snakeHeadW.png')
+        self.tile_headW = pygame.image.load('img/snakeHeadE.png')
 
         # Set the initial x velocity to 20 (or y velocity to 20)
         self.x_change = 20
@@ -38,6 +41,7 @@ class Snake(object):
 
             x_temp, y_temp = self.position[len(self.position)-1]
             game.gameDisplay.blit(self.tile_head, (x_temp, y_temp))
+
             for i in range(1, tail_lenght):
                 x_temp, y_temp = self.position[len(self.position)-1-i]
                 game.gameDisplay.blit(self.tile, (x_temp, y_temp))
