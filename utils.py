@@ -28,6 +28,7 @@ def get_record(score, record):
     else:
         return record
 
+# Plot training scores
 def plot_training_stats(array_counter, array_score, epochs):
     x = np.array([array_counter])[0]
     y = np.array([array_score])[0]
