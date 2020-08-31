@@ -34,11 +34,11 @@ class Agent(object):
         # Build a sequential model
         model = Sequential()
         model.add(Dense(output_dim=self.firstLayer_dim, activation='relu', input_dim=11))
-        model.add(Dropout(0.3))
+        #model.add(Dropout(0.3))
         model.add(Dense(output_dim=self.secondLayer_dim, activation='relu'))
-        model.add(Dropout(0.3))
+        #model.add(Dropout(0.3))
         model.add(Dense(output_dim=self.thirdLayer_dim, activation='relu'))
-        model.add(Dropout(0.3))
+        #model.add(Dropout(0.3))
         model.add(Dense(output_dim=3, activation='softmax'))
         model.compile(loss='mse', optimizer = Adam(self.lr))
         # If true load pre-trained weights
