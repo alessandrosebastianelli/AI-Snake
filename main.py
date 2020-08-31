@@ -55,7 +55,7 @@ def define_parameters():
     params['thirdLayer_dim'] = 150    # neurons in the third layer
     params['epochs'] = 150           
     params['memory_size'] = 2500
-    params['batch_size'] = 500
+    params['batch_size'] = 800
     params['weights_save_path'] = 'weights/weights.hdf5'
     params['load_weights'] = False
     params['train'] = True
