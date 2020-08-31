@@ -73,7 +73,7 @@ def initialize_game(player, game, food, agent, batch_size):
 #---------------------------------------
 #            Game main loop
 #---------------------------------------
-def run(display_option, speed, params):
+def main_game_loop(display_option, speed, params):
     # Initialize the pygame library
     pygame.init()
     # Create the Agent with the parameters dictionary
@@ -173,4 +173,4 @@ if __name__ == '__main__':
     parser.add_argument("--speed", type=int, default=10)
 
     args = parser.parse_args()
-    run(args.display, args.speed, params) 
+    main_game_loop(args.display, args.speed, params) 
