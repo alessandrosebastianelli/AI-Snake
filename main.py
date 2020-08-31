@@ -53,7 +53,7 @@ def define_parameters():
     params['firstLayer_dim'] = 150   # neurons in the first layer
     params['secondLayer_dim'] = 150   # neurons in the second layer
     params['thirdLayer_dim'] = 150    # neurons in the third layer
-    params['epochs'] = 150           
+    params['epochs'] = 200           
     params['memory_size'] = 2500
     params['batch_size'] = 500
     params['weights_save_path'] = 'weights/weights.hdf5'
