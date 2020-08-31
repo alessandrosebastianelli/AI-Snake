@@ -160,7 +160,7 @@ def run(display_option, speed, params):
         agent.network.save_weights(params['weights_save_path'])
     
     # When counter_games > epochs plot the training trends
-    plot_training_stats(counter_plot, score_plot)
+    plot_training_stats(counter_plot, score_plot, params['epochs'])
 
 
 #---------------------------------------
