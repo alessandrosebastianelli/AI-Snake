@@ -31,15 +31,14 @@ def get_record(score, record):
 def plot_training_stats(array_counter, array_score, epochs):
     x = np.array([array_counter])[0]
     y = np.array([array_score])[0]
+    
+    xvals = np.linspace(1, epochs, epochs)
+    p = np.poly1d(np.polyfit(x, y, 3))
 
-    xvals = np.linspace(0, epochs, epochs)
-    #yinterp = np.interp(xvals, x, y)
-    f = interpolate.interp1d(x, y)
-    yinterp = f(xvals)
 
     fig, ax = plt.subplots(nrows = 1, ncols = 1, figsize = (10, 10))    
     ax.plot(x, y, '*', color = 'r', label = 'Score values')
-    ax.plot(xvals, yinterp, '-', color = 'b', label = 'Mean value')
+    ax.plot(xvals, p(xvals), '-', color = 'b', label = 'Mean value')
     ax.set(xlabel='Games', ylabel='Score')
     ax.legend()
     plt.show()
