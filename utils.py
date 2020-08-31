@@ -2,6 +2,7 @@ import pygame
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+from scipy import interpolate
 
 # Function that implements the eating action
 def eat(player, food, game):
@@ -33,7 +34,9 @@ def plot_training_stats(array_counter, array_score):
     y = np.array([array_score])[0]
 
     xvals = np.linspace(0, len(y), len(y))
-    yinterp = np.interp(xvals, x, y)
+    #yinterp = np.interp(xvals, x, y)
+    f = interpolate.interp1d(x, y)
+    yinterp = f(xals)
 
     fig, ax = plt.subplots(nrows = 1, ncols = 1, figsize = (10, 10))    
     ax.plot(x, y, '*', color = 'r', label = 'Score values')
