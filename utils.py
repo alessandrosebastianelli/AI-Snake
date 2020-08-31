@@ -32,7 +32,7 @@ def plot_training_stats(array_counter, array_score):
     x = np.array([array_counter])[0]
     y = np.array([array_score])[0]
 
-    xvals = np.linsapce(0, len(y), len(y))
+    xvals = np.linspace(0, len(y), len(y))
     yinterp = np.interp(xvals, x, y)
 
     fig, ax = plt.subplots(nrows = 1, ncols = 1, figsize = (10, 10))    
