@@ -33,7 +33,7 @@ def plot_training_stats(array_counter, array_score):
     x = np.array([array_counter])[0]
     y = np.array([array_score])[0]
 
-    xvals = np.linspace(0, len(y), len(y))
+    xvals = np.arange(0, len(y), 0.1) # np.linspace(0, len(y), len(y))
     #yinterp = np.interp(xvals, x, y)
     f = interpolate.interp1d(x, y)
     yinterp = f(xvals)
