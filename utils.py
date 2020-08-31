@@ -33,7 +33,7 @@ def plot_training_stats(array_counter, array_score, epochs):
     y = np.array([array_score])[0]
     
     xvals = np.linspace(1, epochs, epochs)
-    p = np.poly1d(np.polyfit(x, y, 3))
+    p = np.poly1d(np.polyfit(x, y, 2))
 
 
     fig, ax = plt.subplots(nrows = 1, ncols = 1, figsize = (10, 10))    
