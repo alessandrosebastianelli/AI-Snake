@@ -36,7 +36,7 @@ def plot_training_stats(array_counter, array_score):
     xvals = np.linspace(0, len(y), len(y))
     #yinterp = np.interp(xvals, x, y)
     f = interpolate.interp1d(x, y)
-    yinterp = f(xals)
+    yinterp = f(xvals)
 
     fig, ax = plt.subplots(nrows = 1, ncols = 1, figsize = (10, 10))    
     ax.plot(x, y, '*', color = 'r', label = 'Score values')
