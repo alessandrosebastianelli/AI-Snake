@@ -37,7 +37,7 @@ def plot_training_stats(array_counter, array_score):
 
     fig, ax = plt.subplots(nrows = 1, ncols = 1, figsize = (10, 10))    
     ax.plot(x, y, '*', color = 'r', label = 'Score values')
-    ax.plot(xvals, yinterp, '-' color = 'b', label = 'Mean value')
+    ax.plot(xvals, yinterp, '-', color = 'b', label = 'Mean value')
     ax.set(xlabel='Games', ylabel='Score')
     ax.legend()
     plt.show()
