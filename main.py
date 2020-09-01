@@ -48,16 +48,18 @@ def display(player, food, game, record, generation):
 
 def define_parameters():
     params = dict()
-    params['epsilon_decay_linear'] = 1/40#1/75
+    params['epsilon_decay_linear'] = 1/75#1/75
     params['lr'] = 0.0005
     params['firstLayer_dim'] = 150   # neurons in the first layer
     params['secondLayer_dim'] = 150   # neurons in the second layer
     params['thirdLayer_dim'] = 150    # neurons in the third layer
+    params['dropout'] = True
+    params['dropoutValue'] = 0.5
     params['epochs'] = 150           
     params['memory_size'] = 2500 #2500
-    params['batch_size'] = 500 #500
+    params['batch_size'] = 800 #500
     params['weights_save_path'] = 'weights/weights.hdf5'
-    params['load_weights'] = False
+    params['load_weights'] = True
     params['train'] = True
     return params
 
