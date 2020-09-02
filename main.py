@@ -70,7 +70,6 @@ def initialize_game(player, game, food, agent, batch_size):
     state_init2 = agent.get_state(game, player, food)
     reward1 = agent.set_reward(player, game.crash)
 
-
     # New update - memory
     agent.remember(state_init1, action, reward1, state_init2, game.crash)
     agent.replay_new(agent.memory, batch_size)
