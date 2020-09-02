@@ -77,7 +77,10 @@ def initialize_game(player, game, food, agent, batch_size):
 #---------------------------------------
 #            Game main loop
 #---------------------------------------
-def main_game_loop(display_option, speed, params):
+def main_game_loop(display_option, speed, train, loadWeights, params):
+    params['load_weights'] = loadWeights
+    params['train'] = train
+    
     # Initialize the pygame library
     pygame.init()
     # Create the Agent with the parameters dictionary
@@ -175,6 +178,8 @@ if __name__ == '__main__':
     # Activate or deactivate the game view and the
     parser.add_argument("--display", type=bool, default=True)
     parser.add_argument("--speed", type=int, default=10)
+    parser.add_argument("--train", type=bool, default=True)
+    parser.add_argument("--loadWeights", type=bool, default=False)
 
     args = parser.parse_args()
-    main_game_loop(args.display, args.speed, params) 
+    main_game_loop(args.display, args.speed, args.train, args.loadWeights, params) 
