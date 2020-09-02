@@ -59,8 +59,8 @@ def define_parameters():
     params['memory_size'] = 2500 
     params['batch_size'] = 500 
     params['weights_save_path'] = 'weights/weights.hdf5'
-    params['load_weights'] = False
-    params['train'] = True
+    #params['load_weights'] = False
+    #params['train'] = True
     return params
 
 def initialize_game(player, game, food, agent, batch_size):
@@ -77,9 +77,7 @@ def initialize_game(player, game, food, agent, batch_size):
 #---------------------------------------
 #            Game main loop
 #---------------------------------------
-def main_game_loop(display_option, speed, params):
-    
-    
+def main_game_loop(display_option, speed, params):    
     # Initialize the pygame library
     pygame.init()
     # Create the Agent with the parameters dictionary
@@ -168,7 +166,6 @@ def main_game_loop(display_option, speed, params):
     # When counter_games > epochs plot the training trends
     plot_training_stats(counter_plot, score_plot, params['epochs'])
 
-
 #---------------------------------------
 if __name__ == '__main__':
     pygame.font.init()
@@ -177,8 +174,11 @@ if __name__ == '__main__':
     # Activate or deactivate the game view and the
     parser.add_argument("--display", type=bool, default=True)
     parser.add_argument("--speed", type=int, default=10)
-    parser.add_argument("--train", type=bool, default=True)
-    parser.add_argument("--loadWeights", type=bool, default=False)
-
+    parser.add_argument("--train", type=bool, default=False)
+    parser.add_argument("--loadWeights", type=bool, default=True)
     args = parser.parse_args()
-    main_game_loop(args.display, args.speed, args.train, args.loadWeights, params) 
+    
+    params['load_weights'] = args.loadWeights
+    params['train'] = args.train
+    
+    main_game_loop(args.display, args.speed, params) 
