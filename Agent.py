@@ -102,6 +102,8 @@ class Agent(object):
             self.reward = 10
         return self.reward
 
+    # New update - memory
+
     # Add actions, states etc. to the memory
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
