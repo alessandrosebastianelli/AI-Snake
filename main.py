@@ -48,18 +48,18 @@ def display(player, food, game, record, generation):
 
 def define_parameters():
     params = dict()
-    params['epsilon_decay_linear'] = 1/75
+    params['epsilon_decay_linear'] = 1/150
     params['lr'] = 0.0005
-    params['firstLayer_dim'] = 150   
-    params['secondLayer_dim'] = 150  
-    params['thirdLayer_dim'] = 150   
+    params['firstLayer_dim'] = 200  #150   
+    params['secondLayer_dim'] = 200 #150  
+    params['thirdLayer_dim'] = 200  #150   
     params['dropout'] = True
-    params['dropoutValue'] = 0.2
+    params['dropoutValue'] = 0.3
     params['epochs'] = 150           
     params['memory_size'] = 2500 
     params['batch_size'] = 500 
     params['weights_save_path'] = 'weights/weights.hdf5'
-    params['load_weights'] = True
+    params['load_weights'] = False
     params['train'] = True
     return params
 
@@ -69,6 +69,9 @@ def initialize_game(player, game, food, agent, batch_size):
     player.move(action, player.x, player.y, game, food, agent)
     state_init2 = agent.get_state(game, player, food)
     reward1 = agent.set_reward(player, game.crash)
+
+
+    # New update - memory
     agent.remember(state_init1, action, reward1, state_init2, game.crash)
     agent.replay_new(agent.memory, batch_size)
 
