@@ -77,9 +77,8 @@ def initialize_game(player, game, food, agent, batch_size):
 #---------------------------------------
 #            Game main loop
 #---------------------------------------
-def main_game_loop(display_option, speed, train, loadWeights, params):
-    params['load_weights'] = loadWeights
-    params['train'] = train
+def main_game_loop(display_option, speed, params):
+    
     
     # Initialize the pygame library
     pygame.init()
