@@ -59,8 +59,6 @@ def define_parameters():
     params['memory_size'] = 2500 
     params['batch_size'] = 500 
     params['weights_save_path'] = 'weights/weights.hdf5'
-    #params['load_weights'] = False
-    #params['train'] = True
     return params
 
 def initialize_game(player, game, food, agent, batch_size):
