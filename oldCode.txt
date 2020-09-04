@@ -1,0 +1,9 @@
+Agent, init:
+
+#self.dataframe = pd.DataFrame()
+#self.short_memory = np.array([])
+#self.agent_target = 1
+#self.agent_predict = 0
+#self.epsilon = 1
+#self.actual = []
+
