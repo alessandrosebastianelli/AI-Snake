@@ -11,14 +11,13 @@ class Agent(object):
     def __init__(self, params):
         self.reward = 0
         self.gamma = 0.9
-        #self.dataframe = pd.DataFrame()
-        
-        #self.short_memory = np.array([])
-        #self.agent_target = 1
-        #self.agent_predict = 0
-        #self.epsilon = 1
-        #self.actual = []
         self.memory = collections.deque(maxlen=params['memory_size'])
+
+        # Old code start
+        #
+        #
+        #
+        # Old code end
 
         # Load network settings 
         self.lr = params['lr']   
