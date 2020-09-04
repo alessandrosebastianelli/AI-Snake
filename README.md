@@ -78,6 +78,8 @@ The function used to get the best score.
 ### Plot training score
 This function is used to plot the training results, on the x-axis the game, on y-axis the score for that game.
 
-
 ## Agent.py
+
+
+
 ## main.py
