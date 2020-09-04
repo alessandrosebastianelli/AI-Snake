@@ -8,7 +8,17 @@ Installation:
 - python main.py --display=True --speed=10 --train=False --loadWeights=True
 
 ## Game.py
+Class used for handling the game.
 
+### Init
+The function called when the object is initialized.
+- Initialize game width and game height
+- Set the game size
+- Load the background
+- Initialize the crash flag to false
+- Initialize a player
+- Initialize a food
+- Initialize the score to 0
 
 ## Snake.py
 Class for the Snake object. 
@@ -48,5 +58,26 @@ This function displays the food and call the update_screen() function.
 This function sets the x and y position randomly and recursively, so during a game there will be only one fruit.
 
 ## utils.py
+Set of scripts used multiple times in the program.
+
+### Eat
+This function handle the event of eating food.
+
+### Update screen
+This function is used to update the screen (required by Pygame).
+
+**For MacOS users:**
+
+```python
+pygame.event.get()
+```
+
+### Get record
+The function used to get the best score.
+
+### Plot training score
+This function is used to plot the training results, on the x-axis the game, on y-axis the score for that game.
+
+
 ## Agent.py
 ## main.py
