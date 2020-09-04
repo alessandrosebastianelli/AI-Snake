@@ -30,6 +30,7 @@ This function is used to update the position of the Snake and of its tail.
 This function is used to move the Snake by modifying the x and y velocity. Firstly this function checks if the Snake have eaten a fruit, if true append the x and y to the positions vector, reset the flag to false and increment the tail size. Secondly based on the input move this function modify the x and y velocity to perform the desired movement. Then the function cheks for possible borders collisions. At the end the eat and the update function are called.
 
 ## Food.py
+Class for the Food object. 
 
 ## Game.py
 ## utils.py

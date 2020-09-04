@@ -27,7 +27,7 @@ class Food(object):
         self.y = rand_y - rand_y % 20
 
         # If snake reaches the fruit position, the function returns the fruit
-        # coordinates (to "eat" it)
+        # coordinates
         if [self.x, self.y] not in snake.position:
             return self.x, self.y
         # Otherwise call recursively the update function
