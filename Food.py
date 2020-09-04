@@ -2,8 +2,7 @@ import pygame
 from random import randint
 from utils import update_screen
 
-class Food(object):
-    
+class Food(object): 
     # Initialize an object of the Food class
     def __init__(self):
         # Default values for x and y
