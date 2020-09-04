@@ -7,6 +7,9 @@ Installation:
 - pip install -r requirements.txt 
 - python main.py --display=True --speed=10 --train=False --loadWeights=True
 
+## Game.py
+
+
 ## Snake.py
 Class for the Snake object. 
 
@@ -32,7 +35,18 @@ This function is used to move the Snake by modifying the x and y velocity. First
 ## Food.py
 Class for the Food object. 
 
-## Game.py
+### Init
+The function called when the object is initialized
+
+- The position (expressed by x and y values) is set to a fixed point 
+- The food tile is loaded
+
+### Render
+This function displays the food and call the update_screen() function.
+
+### Update
+This function sets the x and y position randomly and recursively, so during a game there will be only one fruit.
+
 ## utils.py
 ## Agent.py
 ## main.py

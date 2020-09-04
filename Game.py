@@ -5,7 +5,6 @@ from Food import Food
 class Game:
 
     def __init__(self, width, height):
-        
         # Set the name of the game
         pygame.display.set_caption('Snake Game')
         
