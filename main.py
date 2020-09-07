@@ -17,14 +17,15 @@ from utils import get_record, update_screen, plot_training_stats
 
 def display_ui(game, score, record, generation):
     # Define fonts
-    myfont = pygame.font.SysFont('Segoe UI', 30)
-    myfont_bold = pygame.font.SysFont('Segoe UI', 30, True)
-    text_score = myfont.render('Current score: ', True, (0, 0, 0))
-    text_score_number = myfont_bold.render(str(score), True, (0, 0, 0))
-    text_highest = myfont.render('Best score: ', True, (0, 0, 0))
-    text_highest_number = myfont_bold.render(str(record), True, (0, 0, 0))
-    text_generation = myfont.render('Generation n: ', True, (0, 0, 0))
-    text_generation_number = myfont_bold.render(str(generation), True, (0, 0, 0))
+    font1 = pygame.font.SysFont('Segoe UI', 30)
+    font1_bold = pygame.font.SysFont('Segoe UI', 30, True)
+    # Define text
+    text_score = font1.render('Current score: ', True, (0, 0, 0))
+    text_score_number = font1_bold.render(str(score), True, (0, 0, 0))
+    text_highest = font1.render('Best score: ', True, (0, 0, 0))
+    text_highest_number = font1_bold.render(str(record), True, (0, 0, 0))
+    text_generation = font1.render('Generation n: ', True, (0, 0, 0))
+    text_generation_number = font1_bold.render(str(generation), True, (0, 0, 0))
     # Render the text for the scores
     game.gameDisplay.blit(text_generation, (20, 440)) 
     game.gameDisplay.blit(text_generation_number, (180, 440)) 
@@ -32,7 +33,6 @@ def display_ui(game, score, record, generation):
     game.gameDisplay.blit(text_score_number, (400, 440)) # 200 470
     game.gameDisplay.blit(text_highest, (240, 470))
     game.gameDisplay.blit(text_highest_number, (400, 470))
-
     # Render the background
     game.gameDisplay.blit(game.background, (10, 10))
 
@@ -50,9 +50,9 @@ def define_parameters():
     params = dict()
     params['epsilon_decay_linear'] = 1/75
     params['lr'] = 0.0005
-    params['firstLayer_dim'] = 100  #150   
-    params['secondLayer_dim'] = 100 #150  
-    params['thirdLayer_dim'] = 100  #150   
+    params['firstLayer_dim'] = 100 #150
+    params['secondLayer_dim'] = 100  
+    params['thirdLayer_dim'] = 100  
     params['dropout'] = True
     params['dropoutValue'] = 0.3
     params['epochs'] = 150           
