@@ -50,9 +50,9 @@ def define_parameters():
     params = dict()
     params['epsilon_decay_linear'] = 1/75
     params['lr'] = 0.0005
-    params['firstLayer_dim'] = 100 #150
-    params['secondLayer_dim'] = 100  
-    params['thirdLayer_dim'] = 100  
+    params['firstLayer_dim'] = 150 #150
+    params['secondLayer_dim'] = 150  
+    params['thirdLayer_dim'] = 150  
     params['dropout'] = True
     params['dropoutValue'] = 0.3
     params['epochs'] = 150           
@@ -172,8 +172,8 @@ if __name__ == '__main__':
     # Activate or deactivate the game view and the
     parser.add_argument("--display", type=bool, default=True)
     parser.add_argument("--speed", type=int, default=10)
-    parser.add_argument("--train", type=bool, default=False)
-    parser.add_argument("--loadWeights", type=bool, default=True)
+    parser.add_argument("--train", type=bool, default=True)
+    parser.add_argument("--loadWeights", type=bool, default=False)
     args = parser.parse_args()
     
     params['load_weights'] = args.loadWeights
