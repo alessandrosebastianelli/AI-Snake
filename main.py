@@ -50,9 +50,9 @@ def define_parameters():
     params = dict()
     params['epsilon_decay_linear'] = 1/75
     params['lr'] = 0.0005
-    params['firstLayer_dim'] = 150 #150
-    params['secondLayer_dim'] = 150  
-    params['thirdLayer_dim'] = 150  
+    params['firstLayer_dim'] = 150 # Default 150
+    params['secondLayer_dim'] = 150  # Default 150
+    params['thirdLayer_dim'] = 150  # Default 150
     params['dropout'] = True
     params['dropoutValue'] = 0.3
     params['epochs'] = 150           
