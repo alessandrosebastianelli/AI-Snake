@@ -172,11 +172,13 @@ if __name__ == '__main__':
     # Activate or deactivate the game view and the
     parser.add_argument("--display", type=bool, default=True)
     parser.add_argument("--speed", type=int, default=10)
-    parser.add_argument("--train", type=bool, default=True)
-    parser.add_argument("--loadWeights", type=bool, default=False)
+    parser.add_argument("--train", type=bool, default=False)
+    parser.add_argument("--loadWeights", type=bool, default=True)
     args = parser.parse_args()
     
     params['load_weights'] = args.loadWeights
     params['train'] = args.train
+
+    print(params)
     
     main_game_loop(args.display, args.speed, params) 
