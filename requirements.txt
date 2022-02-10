@@ -8,6 +8,6 @@ pygame==1.9.6
 scipy==1.4.1
 seaborn==0.10.1
 tensorboard==2.2.1
-tensorflow==2.1.0
+tensorflow==2.5.3
 tensorflow-estimator==1.14.0
 
